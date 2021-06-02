@@ -7,6 +7,8 @@ namespace AtlassianConnectCore\Tests;
  */
 class JWTHelperTest extends TestCase
 {
+    use HandlesArrays;
+    
     private $realJWT = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJicmV6emhuZXYiLCJxc2giOiI5M2JkZmRmMGU5N2MwYmY1YWFkMTQ2ZTdhOWUwZmJiNWFjYzg0OGVkZTA5ZmM0ZjNlOTdlN2NjMmE5MmY0MTU2IiwiaXNzIjoiNDcyMGNkNDMtNDMyZS0zZjFkLTlhMzMtYmYxNmZkNmIzYThkIiwiY29udGV4dCI6eyJ1c2VyIjp7InVzZXJLZXkiOiJicmV6emhuZXYiLCJ1c2VybmFtZSI6ImJyZXp6aG5ldiIsImRpc3BsYXlOYW1lIjoiYnJlenpobmV2In19LCJleHAiOjE1MDIyMDM1MDMsImlhdCI6MTUwMjIwMzMyM30.qXgk5OtABoznQoY6T5Q3LJbC_7F77Efhp54jzLWkxNA';
 
     public function testDecode()
@@ -54,7 +56,7 @@ class JWTHelperTest extends TestCase
 
         $result = \AtlassianConnectCore\Helpers\JWTHelper::decode($jwt);
 
-        static::assertArraySubset([
+        $this->assertIsArraySubset([
             'header' => [
                 'typ' => 'JWT',
                 'alg' => 'HS256',

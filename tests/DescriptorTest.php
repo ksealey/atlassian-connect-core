@@ -6,6 +6,8 @@ use Illuminate\Support\Arr;
 
 class DescriptorTest extends TestCase
 {
+    use HandlesArrays;
+
     /**
      * @var \AtlassianConnectCore\Descriptor
      */
@@ -45,7 +47,7 @@ class DescriptorTest extends TestCase
             $contents['name'] = 'Modified add-on';
         });
 
-        static::assertArraySubset(['name' => 'Modified add-on'], $this->descriptor->contents());
+        $this->assertIsArraySubset(['name' => 'Modified add-on'], $this->descriptor->contents());
 
         $this->flush();
 
@@ -54,7 +56,7 @@ class DescriptorTest extends TestCase
             return $contents;
         });
 
-        static::assertArraySubset(
+        $this->assertIsArraySubset(
             ['name' => 'Sample add-on', 'url' => 'http://modified.com'],
             $this->descriptor->contents()
         );
@@ -72,7 +74,7 @@ class DescriptorTest extends TestCase
         $this->descriptor->set('name', 'Updated name');
         $this->descriptor->set('vendor.url', 'http://example.com');
 
-        static::assertArraySubset(
+        $this->assertIsArraySubset(
             ['name' => 'Updated name', 'vendor' => ['name' => 'test', 'url' => 'http://example.com']],
             $this->descriptor->contents()
         );

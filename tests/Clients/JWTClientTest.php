@@ -30,11 +30,10 @@ class JWTClientTest extends \AtlassianConnectCore\Tests\TestCase
         static::assertEquals($actual, $expected);
     }
 
-    /**
-     * @expectedException \GuzzleHttp\Exception\RequestException
-     */
     public function testSendRequestError()
     {
+        $this->expectException(\GuzzleHttp\Exception\RequestException::class);
+        
         $client = $this->createClient([
             new \GuzzleHttp\Exception\RequestException(
                 'Error Communicating with Server',
@@ -225,11 +224,10 @@ class JWTClientTest extends \AtlassianConnectCore\Tests\TestCase
         static::assertEquals($actual, $items);
     }
 
-    /**
-     * @expectedException \Exception
-     */
     public function testPaginateWithUnknown()
     {
+        $this->expectException(\Exception::class);
+
         $tenant = $this->createTenant([
             'product_type' => 'undefined'
         ]);

@@ -6,6 +6,8 @@ use AtlassianConnectCore\Services\TenantService;
 
 class TenantServiceTest extends TestCase
 {
+    use HandlesArrays;
+    
     /**
      * @var TenantService
      */
@@ -63,7 +65,7 @@ class TenantServiceTest extends TestCase
         $tenant = $this->createTenant(['is_dummy' => true]);
         $found = $this->tenantService->dummy();
 
-        static::assertArraySubset($tenant->getAttributes(), $found->getAttributes());
+        $this->assertIsArraySubset($tenant->getAttributes(), $found->getAttributes());
     }
 
     public function testMakeDummy()
